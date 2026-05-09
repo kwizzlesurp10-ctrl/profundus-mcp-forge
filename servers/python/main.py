@@ -3,7 +3,7 @@ from mcp.server.fastmcp import FastMCP
 import os
 
 app = FastAPI(title="Profundus MCP Forge", version="0.1.0")
-mcp = FastMCP("profundus-research", version="0.1.0")
+mcp = FastMCP("profundus-research")
 
 @app.get("/health")
 async def health():
