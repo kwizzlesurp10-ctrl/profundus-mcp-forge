@@ -2,21 +2,24 @@ from fastapi import FastAPI
 from mcp.server.fastmcp import FastMCP
 import os
 
-app = FastAPI()
+app = FastAPI(title="Profundus MCP Forge", version="0.1.0")
 mcp = FastMCP("profundus-research", version="0.1.0")
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy", "version": "0.1.0", "mcp": "FastMCP"}
 
 @mcp.tool(
     name="profundus_triangulate",
     description="Execute ruthless multi-source triangulation with bias audit and [HIGH/MEDIUM/LOW/DESTROYED] rating."
 )
 async def triangulate(query: str, min_sources: int = 3):
-    # TODO: Integrate real web_search, browse_page, x_keyword_search
     return {
         "confidence": "HIGH",
         "query": query,
         "sources_used": min_sources + 2,
         "contradictions_destroyed": 4,
-        "key_findings": ["Triangulation complete (stub)"]
+        "key_findings": ["Triangulation complete (stub - integrate real tools next)"]
     }
 
 @mcp.tool(name="oss_repo_audit", description="Deep forensic audit of GitHub repo via connected tools.")
