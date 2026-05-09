@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-import os
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -43,8 +42,5 @@ async def health():
         "message": "FastMCP ready" if mcp else "MCP initialization failed - check logs"
     }
 
-if __name__ == "__main__":
-    if mcp:
-        mcp.run(transport="sse", host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
-    else:
-        logger.error("Cannot start - FastMCP failed to initialize")
+if mcp:
+    app.mount("/mcp", mcp.sse_app())
