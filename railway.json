@@ -1,6 +1,11 @@
 {
-  "$schema": "https://schema.railpack.com",
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "RAILPACK"
+  },
   "deploy": {
-    "startCommand": "uvicorn servers.python.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+    "startCommand": "python -m servers.python.main",
+    "healthcheckPath": "/health",
+    "restartPolicyType": "always"
   }
 }
