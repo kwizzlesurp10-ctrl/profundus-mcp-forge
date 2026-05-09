@@ -1,0 +1,17 @@
+repos:
+  - repo: local
+    hooks:
+      - id: profudus-smoke-test
+        name: Profundus Local Smoke Test
+        entry: python scripts/test_local.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
